@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Vote;
+use App\Models\Revenue;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
 {
@@ -21,14 +23,7 @@ class AdminController extends Controller
         return view('admin.dashboard', compact('total_vote', 'total_revenue', 'active_participants', 'withdrawn_participants'));
     }
 
-    public function participants() 
-    {
-        return view('admin.participants', $this->getParticipants());
-    }
-
-    /**
-     * Display a listing of the resource.
-     */
+    // Admin Authentication methods
     public function login()
     {
         return view('admin.login', [
@@ -36,26 +31,25 @@ class AdminController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function authenticate(Request $request)
     {
         $data = $request->validate([
-            'email' => "required|email",
+            'email' => ['required',
+                        'email',
+                    Rule::exists('users')->where(function ($query) {
+                      return $query->where('role', 'admin');
+                         })
+                    ],
             'password' => "required|string",
         ]);
         if(auth()->attempt($data, request('remember'))) {
             $request->session()->regenerate();
-            return redirect()->route('admin.dashboard')->with('success','Login Successful');
+            return redirect()->route('admin.dashboard');
         }
 
         return back()->withErrors(['email', 'Invalid credentials'])->onlyInput('email');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function logout()
     {
         auth()->logout();
@@ -67,32 +61,55 @@ class AdminController extends Controller
         return redirect('/');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-   
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, User $user)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(User $user)
     {
         //
     }
 
+    // Participants methods
+
+    public function participants() 
+    {
+        return view('admin.participants.index', $this->getParticipants());
+    }
+
+
+    public function participant_edit(User $user) {
+
+        return view('admin.participants.edit', compact('user'));
+    } 
+
+    public function participant_withdraw() {
+        request()->validate([
+            'user_id' => 'required|integer'
+        ]);
+        $user = User::findOrFail(request('user_id'));
+        $user->status = 'withdrawn';
+        $user->save();
+
+        return back()->with('success', "Contestant successfully withdrawn!");
+    }
+
     private function getParticipants()
     {
-        $active_participants = User::participants()->active()->count();
+        $active_participants = User::participants()->active();
 
-        $withdrawn_participants = User::participants()->withdrawn()->count();
+        $withdrawn_participants = User::participants()->withdrawn();
 
         return compact('active_participants','withdrawn_participants');
+    }
+
+    // Revenue methods
+
+    public function revenue()
+    {
+        $total_revenue = Revenue::sum('amount');
+        $revenues = Revenue::with('user')->paginate(10);
+        return view('admin.revenue.index', compact('total_revenue', 'revenues'));
     }
 }

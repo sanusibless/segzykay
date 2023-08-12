@@ -66,9 +66,11 @@
                   	@csrf
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Email</label>
-                      <div class="input-group has-validation">
+                      <div class="form-group has-validation">
                         <input type="email" name="email" class="form-control" id="yourUsername" value="{{ old('email') }}" required>
-                        @error('email')<small class="text-danger">{{ $message }}</small>@enderror
+                        @error('email')
+                          <small class="text-danger">{{ $message }}</small>
+                        @enderror
                       </div>
                     </div>
 

@@ -88,4 +88,9 @@ class User extends Authenticatable
         $this->vote->votes += $value;
         $this->vote->save();
     }
+
+    public function revenue()
+    {
+        return $this->hasOne(Revenue::class);
+    }
 }

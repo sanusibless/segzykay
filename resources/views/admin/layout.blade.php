@@ -262,12 +262,12 @@
 
       <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.participants') }}">
-          <i class="bi bi-people"></i><span>Participants</span>
+          <i class="bi bi-people"></i><span>Contestants</span>
         </a>
       </li><!-- End Components Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" href="{{ route('admin.revenue') }}">
           <i class="bi bi-currency-dollar"></i><span>Revenue</span>
         </a>
       </li><!-- End Forms Nav -->
@@ -282,7 +282,7 @@
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-login.html">
+        <a class="nav-link collapsed active" href="{{ route('admin.logout') }}">
           <i class="bi bi-box-arrow-right"></i>
           <span>Logout</span>
         </a>
@@ -310,16 +310,9 @@
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
+  <footer id="footer" class="footer fixed-bottom">
     <div class="copyright">
       &copy; Copyright <strong><span>SegzyKay</span></strong>. All Rights Reserved
-    </div>
-    <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
     </div>
   </footer><!-- End Footer -->
 

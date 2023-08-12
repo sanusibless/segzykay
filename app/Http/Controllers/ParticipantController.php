@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Vote;
 use App\Http\Requests\StoreParticipantRequest;
+use App\Http\Requests\UpdateParticipantRequest;
 
 class ParticipantController extends Controller
 {
@@ -40,10 +41,6 @@ class ParticipantController extends Controller
 
         $user = User::create($participant);
 
-        Vote::create([
-            'user_id' => $user->id
-        ]);
-
         return redirect()->route('participants.index')->with('success', 'You are have succefully registered!');
     }
 
@@ -69,9 +66,26 @@ class ParticipantController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        //
+       $data = $request->validate([
+            'firstname' => "required|string",
+            'midname' => "required|string",
+            'lastname' => "required|string",
+            'email' => "nullable|email|unique:users,email",
+            'phone' => "required|digits:11",
+            'dob' => "required|date",
+            'gender' => "nullable",
+            'street' => "required_with:city,state|string",
+            'city' => "required_with:street,state|string",
+            'state' => "required_with:street,city|string",
+            'image' => "nullable|image"
+       ]);
+        if($request->hasFile('image')){
+            $data['image'] = $request->file('image')->store('image','public');
+        }
+        $user->update($data);
+        return back()->with('success', 'Participants Updated succefully!');
     }
 
     /**
