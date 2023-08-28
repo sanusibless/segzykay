@@ -10,6 +10,18 @@
   <link rel="stylesheet" href="{{ url('css/bootstrap.css') }}">
   <link rel="stylesheet" href="{{ url('css/style.css') }}">
   <title>{{ $title ? $title.' - SegzyKay Media Concept' : 'SegzyKay Media Concept' }}</title>
+  <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+  <script>
+
+    var pusher = new Pusher('37e6761c4951fa973cad', {
+      cluster: 'eu'
+    });
+
+    var channel = pusher.subscribe('new-participant');
+    channel.bind('notify-new-participant', function(data) {
+      alert(JSON.stringify(data));
+    });
+  </script>
 </head>
 
 <body data-spy="scroll" data-target="#main-nav" id="home">

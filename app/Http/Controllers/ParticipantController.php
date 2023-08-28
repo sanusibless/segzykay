@@ -41,6 +41,7 @@ class ParticipantController extends Controller
 
         $user = User::create($participant);
 
+        event(new RegisteredParticipants($user));
         return redirect()->route('participants.index')->with('success', 'You are have succefully registered!');
     }
 

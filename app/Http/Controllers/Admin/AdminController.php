@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use App\Models\Vote;
+use App\Http\Controllers\Controller;
 use App\Models\Revenue;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
