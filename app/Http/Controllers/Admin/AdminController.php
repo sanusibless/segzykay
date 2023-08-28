@@ -113,4 +113,6 @@ class AdminController extends Controller
         $revenues = Revenue::with('user')->paginate(10);
         return view('admin.revenue.index', compact('total_revenue', 'revenues'));
     }
+
+    
 }

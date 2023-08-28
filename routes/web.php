@@ -46,6 +46,10 @@ Route::prefix('admin')->name('admin.')->middleware(['admin','auth'])->group(func
 
     Route::get('/settings', [Admin\SettingsController::class, 'index'])->name('settings.index');
     Route::put('/settings/save', [Admin\SettingsController::class, 'save'])->name('settings.save');
+
+    // Profile Routes
+    Route::get('/profile', [Admin\ProfileController::class, 'index'])->name('profile.index');
+
 });
 
 Route::prefix('admin')->name('admin.')->group(function() {
