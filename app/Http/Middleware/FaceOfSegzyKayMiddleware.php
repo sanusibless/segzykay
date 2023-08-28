@@ -5,11 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-<<<<<<< HEAD
 use App\Models\Settings;
 use App\Models\User;
-=======
->>>>>>> 0bf83c7677d88573de4262a30274430f09f1e68a
 
 class FaceOfSegzyKayMiddleware
 {
@@ -20,13 +17,13 @@ class FaceOfSegzyKayMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-<<<<<<< HEAD
         $fosks = Settings::first();
 
         $contents = User::participants();
-        if($fosks->number_of_contestant == )
-=======
->>>>>>> 0bf83c7677d88573de4262a30274430f09f1e68a
+
+        if($fosks->number_of_contestant == $contents->count()) {
+            return response()->view('participants.full');
+        }
         return $next($request);
     }
 }
