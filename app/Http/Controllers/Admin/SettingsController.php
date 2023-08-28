@@ -37,6 +37,6 @@ class SettingsController extends Controller
                 $settings->delete();
             }
 
-            return back()->with('success', "Face of Segzykay is successfully closed!");
+            return back();
     }
 }

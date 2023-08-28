@@ -22,7 +22,7 @@ Route::get('/', function () {
 
 Route::name('participants.')->group(function () {
     Route::get('/models', [ParticipantController::class, 'index'])->name('index');
-    Route::get('/models/register', [ParticipantController::class, 'create'])->name('create');
+    Route::get('/models/register', [ParticipantController::class, 'create'])->name('create')->middleware('fosks');
     Route::post('/models/store',[ParticipantController::class, 'store'])->name('store');
     Route::get('/models/{user}/profile',[ParticipantController::class, 'show'])->name('show');
     Route::put('/models/{user}/update',[ParticipantController::class, 'update'])->middleware('admin')->name('update');
