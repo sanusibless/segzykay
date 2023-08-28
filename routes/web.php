@@ -1,9 +1,10 @@
 <?php
+namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\VoteController;
-use App\Http\Controllers\AdminController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,17 +33,22 @@ Route::name('participants.')->group(function () {
 
 Route::prefix('admin')->name('admin.')->middleware(['admin','auth'])->group(function () {
 
-    Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-    Route::get('/participants', [AdminController::class, 'participants'])->name('participants');
-    Route::get('/participants/{user}/edit', [AdminController::class, 'participant_edit'])->name('participant.edit');
-    Route::delete('/participants/withdrawn', [AdminController::class, 'participant_withdraw'])->name('participant.withdraw');
+    Route::get('/logout', [Admin\AdminController::class, 'logout'])->name('logout');
+    Route::get('/dashboard', [Admin\AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/participants', [Admin\AdminController::class, 'participants'])->name('participants');
+    Route::get('/participants/{user}/edit', [Admin\AdminController::class, 'participant_edit'])->name('participant.edit');
+    Route::delete('/participants/withdrawn', [Admin\AdminController::class, 'participant_withdraw'])->name('participant.withdraw');
 
     // Revenue Routes
-    Route::get('/revenue', [AdminController::class, 'revenue'])->name('revenue');
+    Route::get('/revenue', [Admin\AdminController::class, 'revenue'])->name('revenue');
+
+    //Settings Routes
+
+    Route::get('/settings', [Admin\SettingsController::class, 'index'])->name('settings.index');
+    Route::put('/settings/save', [Admin\SettingsController::class, 'save'])->name('settings.save');
 });
 
 Route::prefix('admin')->name('admin.')->group(function() {
-    Route::get('/login', [AdminController::class, 'login'])->name('login');
-    Route::post('/authenticate', [AdminController::class, 'authenticate'])->name('authenticate');    
+    Route::get('/login', [Admin\AdminController::class, 'login'])->name('login');
+    Route::post('/authenticate', [Admin\AdminController::class, 'authenticate'])->name('authenticate');    
 });

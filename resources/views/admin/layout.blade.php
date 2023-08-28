@@ -7,6 +7,7 @@
 
   <title> @yield('title') | Admin - {{ env('APP_NAME') }}</title>
   <meta content="" name="description">
+  @yield('meta-request')
   <meta content="" name="keywords">
 
   <!-- Favicons -->
@@ -19,6 +20,7 @@
 
   <!-- Vendor CSS Files -->
   <link href="{{ url('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url('css/toastr.css') }}" rel="stylesheet">
   <link href="{{ url('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
   <link href="{{ url('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
   <link href="{{ url('assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
@@ -28,6 +30,22 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ url('assets/css/style.css') }}" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+  <script>
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('37e6761c4951fa973cad', {
+      cluster: 'eu'
+    });
+
+    var channel = pusher.subscribe('new-participant');
+    channel.bind('notify-new-participant', function(data) {
+      console.log(data)
+    });
+  </script>
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.5.0
@@ -275,7 +293,7 @@
       <li class="nav-heading">Others</li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="users-profile.html">
+        <a class="nav-link collapsed" href="{{ route('admin.settings.index') }}">
           <i class="bi bi-gear"></i>
           <span>Settings</span>
         </a>
@@ -310,7 +328,7 @@
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer fixed-bottom">
+  <footer id="footer" class="footer">
     <div class="copyright">
       &copy; Copyright <strong><span>SegzyKay</span></strong>. All Rights Reserved
     </div>
@@ -319,6 +337,8 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
+  @stack('scripts')
+  <script src="{{ url('js/jquery.js') }}"></script>
   <script src="{{ url('assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
   <script src="{{ url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ url('assets/vendor/chart.js') }}/chart.umd.js') }}"></script>
@@ -337,7 +357,6 @@
       setTimeout(() => alert.style.display = 'none', 5000);
     }
   </script>
-
 </body>
 
 </html>
