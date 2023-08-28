@@ -17,13 +17,19 @@ class FaceOfSegzyKayMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+        
         $fosks = Settings::first();
 
-        $contents = User::participants();
+        $contentants = User::participants();
 
-        if($fosks->number_of_contestant == $contents->count()) {
-            return response()->view('participants.full');
+        if($fosks != null) {
+            if($fosks->number_of_contestant == $contentants->count()) {
+                return response()->view('error.full');
+            }
+        } else {
+            return response()->view('error.notyetlaunched');
         }
+
         return $next($request);
     }
 }

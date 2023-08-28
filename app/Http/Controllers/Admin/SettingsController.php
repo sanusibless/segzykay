@@ -36,6 +36,7 @@ class SettingsController extends Controller
             if($settings != null) {
                 $settings->delete();
             }
-            
+
             return back();
+    }
 }
