@@ -58,6 +58,13 @@
                     					<input value="{{ $settings->number_of_contestant ?? old('number_of_contestant') }}" class="form-control disable" type="number" name="number_of_contestant" step="1" min="18">
                               @error('number_of_contestant') <small class="text-danger">{{ $message }}</small>@enderror
                     					</div>
+
+                              <div class="">
+                              <div class="form-group mb-3">
+                                <label class="form-label">Cost per Vote</label>
+                              <input value="{{ $settings->vote_price ?? old('vote_price') }}" class="form-control disable" type="number" name="vote_price" step="1" min="18">
+                              @error('vote_price') <small class="text-danger">{{ $message }}</small>@enderror
+                              </div>
                     					
                     				</div>
                     				<div class="">

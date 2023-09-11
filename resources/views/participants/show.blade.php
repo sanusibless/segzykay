@@ -31,7 +31,10 @@
       </div>
       <div class="modal-body">
         	<div>
-        		<form class="form" action="{{ route('participants.vote', ['user' => $participant->id] ) }}" method="POST">
+        		<form class="form" action="{{ route('participants.pay') }}" method="POST">
+        			<input type="hidden" name="user" value="{{ $participant->id }}">
+							<input type="hidden" name="email" value="{{ $participant->email }}">
+							<input type="hidden" name="amount" value="40000">
         			@csrf
         			<div class="form-group">
         				<label>The number of votes you want to buy</label>

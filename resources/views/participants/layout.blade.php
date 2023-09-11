@@ -34,19 +34,16 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a href="#home" class="nav-link">Home</a>
+            <a href="{{ route('home') }}" class="nav-link">Home</a>
           </li>
           <li class="nav-item">
-            <a href="#explore-section" class="nav-link">Wedding</a>
+            <a href="{{ route('participants.index')}}" class="nav-link">Contestants</a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('participants.index')}}" class="nav-link">Models</a>
+            <a href="{{-- route('about') --}}" class="nav-link">About</a>
           </li>
           <li class="nav-item">
-            <a href="#share-section" class="nav-link">About</a>
-          </li>
-          <li class="nav-item">
-            <a href="#share-section" class="nav-link">Contact</a>
+            <a href="{{-- route('contact') --}}" class="nav-link">Contact</a>
           </li>
         </ul>
       </div>

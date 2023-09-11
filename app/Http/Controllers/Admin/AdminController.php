@@ -100,6 +100,8 @@ class AdminController extends Controller
     {
         $active_participants = User::participants()->active();
 
+        $pending_participants = User::participants()->pending();
+
         $withdrawn_participants = User::participants()->withdrawn();
 
         return compact('active_participants','withdrawn_participants');

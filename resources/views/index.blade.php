@@ -13,7 +13,8 @@
 </head>
 
 <body data-spy="scroll" data-target="#main-nav" id="home">
-  <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top" id="main-nav">
+   <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top" id="main-nav">
+    <div class="container">
       <a href="index.html" class="navbar-brand">SegzyKay</a>
       <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
@@ -21,30 +22,20 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a href="#home" class="nav-link">Home</a>
+            <a href="{{ route('home') }}" class="nav-link">Home</a>
           </li>
           <li class="nav-item">
-            <a href="#explore-section" class="nav-link">Services</a>
+            <a href="{{ route('participants.index')}}" class="nav-link">Contestants</a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('participants.index')}}" class="nav-link">Models</a>
+            <a href="{{-- route('about') --}}" class="nav-link">About</a>
           </li>
           <li class="nav-item">
-            <a href="#share-section" class="nav-link">About</a>
-          </li>
-          <li class="nav-item">
-            <a href="#share-section" class="nav-link">Contact</a>
+            <a href="{{-- route('contact') --}}" class="nav-link">Contact</a>
           </li>
         </ul>
-         <div class="socials ">
-        <ul class="navbar-nav mr-auto">
-          <li><a href="https://ww.facebook.com/SegzyKay"><i class="fas fa-facebook"></i></a></li>
-          <li><a href="https://ww.twitter.com/SegzyKay"><i class="fas fa-twitter"></i></a></li>
-          <li><a href="https://ww.instagram.com/SegzyKay"><i class="fas fa-instagram"></i></a></li>
-          <li><a href="https://ww.whatapp.com/SegzyKay"><i class="fas fa-whatapp"></i></a></li>
-        </ul>
       </div>
-      </div>
+    </div>
   </nav>
 
   <!-- HOME SECTION -->

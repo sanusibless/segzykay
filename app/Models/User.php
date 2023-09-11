@@ -68,6 +68,11 @@ class User extends Authenticatable
         return $query->where('status', 'withdrawn');
     }
 
+    public function scopePending($query) 
+    {
+        return $query->where('status', 'pending');
+    }
+
     public function getFullNameAttribute() 
     {
         return $this->firstname . " " . $this->lastname;

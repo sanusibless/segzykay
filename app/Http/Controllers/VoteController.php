@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Vote;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Paystack;
 
 class VoteController extends Controller
 {
@@ -17,8 +18,6 @@ class VoteController extends Controller
             'votes' => "required|integer|min:10"
         ]);
 
-        $user->votes = $data['votes'];
-
         return back()->with('success', 'Votes successfully purchased');
     }
 
@@ -26,4 +25,6 @@ class VoteController extends Controller
     {
 
     }
+
 }
+

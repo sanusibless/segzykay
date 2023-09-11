@@ -17,7 +17,7 @@ class ParticipantController extends Controller
     {
         return view('participants.index', [
             'participants' => User::participants()->active()->get(),
-            'title' => 'Models'
+            'title' => 'Contestants'
         ]);
     }
 

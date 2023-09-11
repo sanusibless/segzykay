@@ -6,7 +6,7 @@
   @section('content')
       <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Particpants</h5>
+              <h5 class="card-title">Contestants</h5>
 
               <!-- Bordered Tabs -->
               <ul class="nav nav-tabs nav-tabs-bordered" id="borderedTab" role="tablist">
